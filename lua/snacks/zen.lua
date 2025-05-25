@@ -145,7 +145,10 @@ function M.zen(opts)
 
   -- create window
   local win = Snacks.win(win_opts)
-  vim.cmd([[norm! zz]])
+  -- Only run normal mode commands if not in terminal mode
+  if vim.bo[buf].buftype ~= "terminal" then
+    vim.cmd([[norm! zz]])
+  end
   M.win = win
 
   if show_indicator then
